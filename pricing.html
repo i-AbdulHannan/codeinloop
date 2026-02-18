@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>codeinloop | We craft high-performance websites & WordPress solutions that drive real business growth.</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <style>
+    * { cursor: none; margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Space Grotesk', sans-serif; background: #000; color: #fff; overflow-x: hidden; }
+    .cursor-dot, .cursor-ring { position: fixed; border-radius: 50%; pointer-events: none; z-index: 9999; }
+    .cursor-dot { width: 8px; height: 8px; background: white; mix-blend-mode: difference; }
+    .cursor-ring { width: 40px; height: 40px; border: 1.5px solid rgba(255,255,255,0.3); z-index: 9998; transition: all 0.2s; }
+    .glass-card { background: rgba(255,255,255,0.02); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.03); border-radius: 2rem; }
+    .pricing-card:hover { transform: scale(1.02); border-color: #0326fc; box-shadow: 0 30px 60px -20px #0326fc; transition: all 0.3s; }
+    .popular { border: 2px solid #0326fc; position: relative; }
+    .popular-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #0326fc; color: white; padding: 4px 20px; border-radius: 100px; font-size: 0.9rem; font-weight: bold; white-space: nowrap; }
+    .toggle-bg { background: #1a1a1a; border-radius: 60px; padding: 4px; display: inline-flex; }
+    .toggle-btn { padding: 8px 20px; border-radius: 60px; cursor: pointer; transition: all 0.2s; font-size: 0.9rem; }
+    @media (max-width: 640px) { .toggle-btn { padding: 6px 16px; } }
+    .toggle-active { background: #0326fc; color: white; }
+    .load-reveal { opacity: 0; transform: translateY(20px); transition: 1s; }
+    .loaded .load-reveal { opacity: 1; transform: translateY(0); }
+    @media (max-width: 768px) {
+      nav { padding: 12px 20px !important; }
+      main { padding-top: 100px !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+  <div id="pageWrapper" style="opacity:0; transition:1.5s">
+    <!-- FIXED NAVBAR - Perfectly centered, no right shift -->
+<nav class="fixed top-4 sm:top-6 left-0 right-0 mx-auto w-[95%] sm:w-[90%] max-w-7xl z-50 glass-card px-4 sm:px-8 py-3 sm:py-4 flex items-center justify-between load-reveal" style="left: 50%; transform: translateX(-50%);">
+  <div class="text-xl sm:text-2xl font-bold tracking-tight text-white whitespace-nowrap">codeinl∞︎︎p</div>
+  
+  <!-- Desktop Navigation - Centered properly -->
+  <div class="hidden md:flex items-center justify-center space-x-6 lg:space-x-10 text-sm font-medium text-white/80 absolute left-1/2 transform -translate-x-1/2">
+    <a href="index.html" class="hover:text-white transition-colors whitespace-nowrap">Home</a>
+    <a href="about.html" class="hover:text-white transition-colors whitespace-nowrap">About</a>
+    <a href="services.html" class="hover:text-white transition-colors whitespace-nowrap">Services</a>
+    <a href="projects.html" class="hover:text-white transition-colors whitespace-nowrap">Projects</a>
+    <a href="pricing.html" class="hover:text-white transition-colors whitespace-nowrap">Pricing</a>
+    <a href="contact.html" class="hover:text-white transition-colors whitespace-nowrap">Contact</a>
+  </div>
+  
+  <!-- Right side buttons -->
+  <div class="flex items-center gap-2 sm:gap-4 ml-auto">
+    <a href="https://calendly.com/projects-abdulhannan" class="hidden sm:inline-block text-sm font-medium border border-white/20 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full hover:bg-white hover:text-black transition-all whitespace-nowrap">Let's talk</a>
+    <!-- Mobile menu button -->
+    <button class="md:hidden text-white text-2xl focus:outline-none">☰</button>
+  </div>
+</nav>
+
+<!-- Mobile Menu Dropdown (hidden by default) -->
+<div class="fixed top-20 left-1/2 transform -translate-x-1/2 w-[95%] max-w-7xl z-40 hidden md:hidden mobile-menu">
+  <div class="glass-card p-6 flex flex-col space-y-4 text-center">
+    <a href="index.html" class="text-white/80 hover:text-white py-2 transition">Home</a>
+    <a href="about.html" class="text-white/80 hover:text-white py-2 transition">About</a>
+    <a href="services.html" class="text-white/80 hover:text-white py-2 transition">Services</a>
+    <a href="projects.html" class="text-white/80 hover:text-white py-2 transition">Projects</a>
+    <a href="pricing.html" class="text-white/80 hover:text-white py-2 transition">Pricing</a>
+    <a href="contact.html" class="text-white/80 hover:text-white py-2 transition">Contact</a>
+    <a href="contact.html" class="sm:hidden border border-white/20 px-4 py-2 rounded-full hover:bg-white hover:text-black transition mt-2">Let's talk</a>
+  </div>
+</div>
+
+    <main class="pt-24 sm:pt-28 md:pt-32 lg:pt-36 px-4 sm:px-6">
+      <div class="max-w-7xl mx-auto text-center">
+        <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold load-reveal">Invest in <span class="text-[#0326fc]">excellence</span></h1>
+        <p class="text-white/40 text-base sm:text-lg md:text-xl mt-4 sm:mt-6 load-reveal">Simple, transparent, premium. No hidden fees.</p>
+        
+        <!-- Toggle monthly/yearly -->
+        <div class="flex justify-center mt-10 sm:mt-12 md:mt-16 load-reveal">
+          <div class="toggle-bg flex">
+            <div class="toggle-btn toggle-active" id="monthlyBtn">Actual Cost</div>
+            <div class="toggle-btn" id="yearlyBtn">Discounted Cost <span class="text-[#0326fc] ml-1">20% Off</span></div>
+          </div>
+        </div>
+
+        <!-- Pricing cards -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mt-10 sm:mt-16 md:mt-20">
+          <!-- Basic -->
+          <div class="glass-card p-6 sm:p-8 md:p-10 pricing-card load-reveal" data-monthly="199" data-yearly="150">
+            <h3 class="text-2xl sm:text-3xl font-bold">Web design</h3>
+            <div class="text-3xl sm:text-4xl md:text-5xl font-black mt-4 sm:mt-6 md:mt-8"><span class="price">$199</span> <span class="text-lg sm:text-xl md:text-2xl text-white/30">/per </span></div>
+            <ul class="mt-4 sm:mt-6 md:mt-8 space-y-2 sm:space-y-3 md:space-y-4 text-white/60 text-sm sm:text-base">
+              <li>✓ Responsive design</li>
+              <li>✓ Secure</li>
+              <li>✓ 3-4 pages</li>
+              <li>✓ 100% satisfaction guarantee</li>
+              <li>✓ SSL Free</li>
+            </ul>
+          </div>
+          <!-- Popular -->
+          <div class="glass-card p-6 sm:p-8 md:p-10 pricing-card popular load-reveal" style="transition-delay:0.2s;" data-monthly="250" data-yearly="220">
+            <div class="popular-badge text-xs sm:text-sm">Most popular</div>
+            <h3 class="text-2xl sm:text-3xl font-bold">Elite WordPress</h3>
+            <div class="text-3xl sm:text-4xl md:text-5xl font-black mt-4 sm:mt-6 md:mt-8"><span class="price">$250</span> <span class="text-lg sm:text-xl md:text-2xl text-white/30">/per </span></div>
+            <ul class="mt-4 sm:mt-6 md:mt-8 space-y-2 sm:space-y-3 md:space-y-4 text-white/60 text-sm sm:text-base">
+              <li>✓ Responsive design</li>
+              <li>✓ Full‑time dedication</li>
+              <li>✓ Elementor</li>
+              <li>✓ 100% satisfaction guarantee</li>
+              <li>✓ Secure</li>
+              <li>✓ SSL free</li>
+              <li>✓ SEO optimized</li>
+              <li>✓ 5-6 pages</li>
+              <li>✓ 1 year domain and hosting free</li>
+            </ul>
+          </div>
+          <!-- Enterprise -->
+          <div class="glass-card p-6 sm:p-8 md:p-10 pricing-card load-reveal sm:col-span-2 lg:col-span-1" style="transition-delay:0.4s;" data-monthly="350" data-yearly="320">
+            <h3 class="text-2xl sm:text-3xl font-bold">Custom Development</h3>
+            <div class="text-3xl sm:text-4xl md:text-5xl font-black mt-4 sm:mt-6 md:mt-8"><span class="price">$350</span> <span class="text-lg sm:text-xl md:text-2xl text-white/30">/per </span></div>
+            <ul class="mt-4 sm:mt-6 md:mt-8 space-y-2 sm:space-y-3 md:space-y-4 text-white/60 text-sm sm:text-base">
+              <li>✓ Responsive design</li>
+              <li>✓ Custom R&D</li>
+              <li>✓ Full‑time dedication</li>
+              <li>✓ MERN Stack</li>
+              <li>✓ 100% satisfaction guarantee</li>
+              <li>✓ Secure</li>
+              <li>✓ SSL free</li>
+              <li>✓ SEO optimized</li>
+              <li>✓ E-commerce website</li>
+              <li>✓ 9-11 pages</li>
+              <li>✓ 1 year domain and hosting free</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="border-t border-white/5 py-12 sm:py-16 md:py-20 px-4 sm:px-6 mt-16 sm:mt-20 md:mt-32">
+        <div class="max-w-7xl mx-auto text-white/30 text-center text-sm sm:text-base">2026 © & All Right Reserved by codeinloop
+</div>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    window.addEventListener('load', function() {
+      document.getElementById('pageWrapper').style.opacity = '1';
+      document.body.classList.add('loaded');
+      
+      const dot = document.getElementById('cursorDot');
+      const ring = document.getElementById('cursorRing');
+      document.addEventListener('mousemove', (e) => {
+        dot.style.transform = `translate(${e.clientX-4}px, ${e.clientY-4}px)`;
+        ring.style.transform = `translate(${e.clientX-20}px, ${e.clientY-20}px)`;
+      });
+
+      // Toggle pricing
+      const monthlyBtn = document.getElementById('monthlyBtn');
+      const yearlyBtn = document.getElementById('yearlyBtn');
+      const prices = document.querySelectorAll('.price');
+
+      function updatePricing(plan) {
+        prices.forEach(price => {
+          const card = price.closest('.pricing-card');
+          const val = card.dataset[plan];
+          price.innerText = '$' + val;
+        });
+      }
+
+      monthlyBtn.addEventListener('click', () => {
+        monthlyBtn.classList.add('toggle-active');
+        yearlyBtn.classList.remove('toggle-active');
+        updatePricing('monthly');
+      });
+      
+      yearlyBtn.addEventListener('click', () => {
+        yearlyBtn.classList.add('toggle-active');
+        monthlyBtn.classList.remove('toggle-active');
+        updatePricing('yearly');
+      });
+
+      // Mobile menu
+      const menuBtn = document.querySelector('button.md\\:hidden');
+      const navLinks = document.querySelector('.hidden.md\\:flex');
+      if (menuBtn && navLinks) {
+        menuBtn.addEventListener('click', () => {
+          navLinks.classList.toggle('hidden');
+          navLinks.classList.toggle('flex');
+          navLinks.classList.toggle('flex-col');
+          navLinks.classList.toggle('absolute');
+          navLinks.classList.toggle('top-20');
+          navLinks.classList.toggle('left-0');
+          navLinks.classList.toggle('w-full');
+          navLinks.classList.toggle('glass-card');
+          navLinks.classList.toggle('p-6');
+          navLinks.classList.toggle('space-x-0');
+          navLinks.classList.toggle('space-y-4');
+          navLinks.classList.toggle('z-50');
+        });
+      }
+    });
+  </script>
+</body>
+</html>

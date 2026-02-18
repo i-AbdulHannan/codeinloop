@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>codeinl∞︎︎p | We craft high-performance websites & WordPress solutions that drive real business growth.
+ </title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <style>
+    * { cursor: none; margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Space Grotesk', system-ui, sans-serif; background: #000; color: #fff; overflow-x: hidden; }
+    ::selection { background: #0326fc; color: #fff; }
+    .cursor-dot { width: 8px; height: 8px; background: white; position: fixed; border-radius: 50%; pointer-events: none; z-index: 9999; mix-blend-mode: difference; }
+    .cursor-ring { width: 40px; height: 40px; border: 1.5px solid rgba(255,255,255,0.3); position: fixed; border-radius: 50%; pointer-events: none; z-index: 9998; transition: all 0.2s; }
+    .glass-card { background: rgba(255,255,255,0.02); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.03); border-radius: 2rem; transition: all 0.3s; }
+    .glass-card:hover { border-color: rgba(3,38,252,0.3); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
+    .skill-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 100px; overflow: hidden; }
+    .skill-fill { height: 100%; background: #0326fc; width: 0; border-radius: 100px; }
+    .timeline-dot { width: 12px; height: 12px; background: #0326fc; border-radius: 50%; position: relative; }
+    .load-reveal { opacity: 0; transform: translateY(20px); transition: opacity 1s ease, transform 1s ease; }
+    .loaded .load-reveal { opacity: 1; transform: translateY(0); }
+    @media (max-width: 768px) {
+      nav { padding: 12px 20px !important; }
+      main { padding-top: 100px !important; }
+      .hero-text { font-size: 3.5rem !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <div id="pageWrapper" style="opacity:0; transition: opacity 1.5s cubic-bezier(0.2,1,0.3,1);">
+    <!-- FIXED NAVBAR - Perfectly centered, no right shift -->
+<nav class="fixed top-4 sm:top-6 left-0 right-0 mx-auto w-[95%] sm:w-[90%] max-w-7xl z-50 glass-card px-4 sm:px-8 py-3 sm:py-4 flex items-center justify-between load-reveal" style="left: 50%; transform: translateX(-50%);">
+  <div class="text-xl sm:text-2xl font-bold tracking-tight text-white whitespace-nowrap">codeinl∞︎︎p</div>
+  
+  <!-- Desktop Navigation - Centered properly -->
+  <div class="hidden md:flex items-center justify-center space-x-6 lg:space-x-10 text-sm font-medium text-white/80 absolute left-1/2 transform -translate-x-1/2">
+    <a href="index.html" class="hover:text-white transition-colors whitespace-nowrap">Home</a>
+    <a href="about.html" class="hover:text-white transition-colors whitespace-nowrap">About</a>
+    <a href="services.html" class="hover:text-white transition-colors whitespace-nowrap">Services</a>
+    <a href="projects.html" class="hover:text-white transition-colors whitespace-nowrap">Projects</a>
+    <a href="pricing.html" class="hover:text-white transition-colors whitespace-nowrap">Pricing</a>
+    <a href="contact.html" class="hover:text-white transition-colors whitespace-nowrap">Contact</a>
+  </div>
+  
+  <!-- Right side buttons -->
+  <div class="flex items-center gap-2 sm:gap-4 ml-auto">
+    <a href="contact.html" class="hidden sm:inline-block text-sm font-medium border border-white/20 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full hover:bg-white hover:text-black transition-all whitespace-nowrap">Let's talk</a>
+    <!-- Mobile menu button -->
+    <button class="md:hidden text-white text-2xl focus:outline-none">☰</button>
+  </div>
+</nav>
+
+<!-- Mobile Menu Dropdown (hidden by default) -->
+<div class="fixed top-20 left-1/2 transform -translate-x-1/2 w-[95%] max-w-7xl z-40 hidden md:hidden mobile-menu">
+  <div class="glass-card p-6 flex flex-col space-y-4 text-center">
+    <a href="index.html" class="text-white/80 hover:text-white py-2 transition">Home</a>
+    <a href="about.html" class="text-white/80 hover:text-white py-2 transition">About</a>
+    <a href="services.html" class="text-white/80 hover:text-white py-2 transition">Services</a>
+    <a href="projects.html" class="text-white/80 hover:text-white py-2 transition">Projects</a>
+    <a href="pricing.html" class="text-white/80 hover:text-white py-2 transition">Pricing</a>
+    <a href="contact.html" class="text-white/80 hover:text-white py-2 transition">Contact</a>
+    <a href="contact.html" class="sm:hidden border border-white/20 px-4 py-2 rounded-full hover:bg-white hover:text-black transition mt-2">Let's talk</a>
+  </div>
+</div>
+
+    <main class="pt-28 sm:pt-32 md:pt-36 lg:pt-40 px-4 sm:px-6">
+      <!-- Hero - Agency story -->
+      <section class="max-w-7xl mx-auto mb-16 sm:mb-24 md:mb-32">
+        <span class="text-[#0326fc] text-xs sm:text-sm tracking-widest uppercase load-reveal">Our narrative</span>
+        <h1 class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold mt-4 sm:mt-6 leading-tight load-reveal hero-text" style="transition-delay:0.2s;">
+          We code<br>the <span class="text-[#0326fc]">unreal</span>.
+        </h1>
+        <div class="grid md:grid-cols-2 gap-6 sm:gap-10 md:gap-16 mt-10 sm:mt-16">
+          <p class="text-base sm:text-lg md:text-xl text-white/60 load-reveal" style="transition-delay:0.3s;">codeinl∞︎︎p was founded in 2024 as a collaborative vision by Abdul Hannan and Saad Kamal two developers driven by a shared passion for clean code, modern technologies, and results-oriented web solutions.
+</p>
+          <p class="text-base sm:text-lg md:text-xl text-white/40 load-reveal" style="transition-delay:0.4s;">Together, we combine strong backend logic, clean frontend experiences, and modern development practices to deliver reliable web and WordPress solutions that clients can trust.</p>
+        </div>
+      </section>
+
+      <!-- Founder section -->
+      <section class="max-w-7xl mx-auto py-16 sm:py-20 md:py-24 border-t border-white/10">
+        <div class="grid md:grid-cols-2 gap-8 sm:gap-12 md:gap-20 items-center">
+          <div class="load-reveal">
+            <span class="text-[#0326fc] text-xs sm:text-sm tracking-widest uppercase">Co-founder</span>
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 sm:mt-4">Abdul Hannan</h2>
+            <p class="text-white/40 text-base sm:text-lg md:text-xl mt-4 sm:mt-6">WordPress developer | Full Stack engineer, technologist & creative coder.</p>
+            <p class="text-white/60 mt-6 sm:mt-8 leading-relaxed text-sm sm:text-base">"I started this agency because I wanted to build the kind of work that makes people stop scrolling. Anyone can build a website. We build authority."</p>
+            <div class="flex gap-3 sm:gap-4 mt-6 sm:mt-8">
+              <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-[#0326fc]/20 flex items-center justify-center text-xl sm:text-2xl">→</div>
+              <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white/5 flex items-center justify-center text-xl sm:text-2xl"><a href="https://www.linkedin.com/in/abdulhannan-projects/">in</a></div>
+            </div>
+            <br><br>
+            <span class="text-[#0326fc] text-xs sm:text-sm tracking-widest uppercase">Co-founder</span>
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 sm:mt-4">Saad Kamal</h2>
+            <p class="text-white/40 text-base sm:text-lg md:text-xl mt-4 sm:mt-6">MERN Stack Developer | Creating modern web experiences
+</p>
+            <p class="text-white/60 mt-6 sm:mt-8 leading-relaxed text-sm sm:text-base">"We don’t sell services. We build digital assets that grow your business while you sleep."</p>
+            <div class="flex gap-3 sm:gap-4 mt-6 sm:mt-8">
+              <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-[#0326fc]/20 flex items-center justify-center text-xl sm:text-2xl">→</div>
+              <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white/5 flex items-center justify-center text-xl sm:text-2xl"><a href="https://www.linkedin.com/in/i-muhammadsaad/">in</a></div>
+            </div>
+          </div>
+          
+          <div class="glass-card p-8 sm:p-10 md:p-12 h-[300px] sm:h-[400px] md:h-[500px] flex items-end load-reveal" style="background: linear-gradient(145deg, #0326fc20, transparent);">
+            <p class="text-6xl sm:text-7xl md:text-8xl font-black text-white/10">'20</p>
+          </div>
+        </div>
+      </section>
+
+      
+
+      <!-- Vision & Mission -->
+      <section class="max-w-7xl mx-auto py-12 sm:py-16 md:py-24 grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-12">
+        <div class="glass-card p-6 sm:p-10 md:p-12 lg:p-16 load-reveal">
+          <span class="text-4xl sm:text-5xl md:text-6xl text-[#0326fc] block mb-4 sm:mb-6 md:mb-8">⌂</span>
+          <h3 class="text-2xl sm:text-3xl font-bold mb-2 sm:mb-3 md:mb-4">Vision</h3>
+          <p class="text-white/40 text-sm sm:text-base md:text-lg">To become the leading architectural force for the next generation of the web — where websites feel like living systems.</p>
+        </div>
+        <div class="glass-card p-6 sm:p-10 md:p-12 lg:p-16 load-reveal" style="transition-delay:0.2s;">
+          <span class="text-4xl sm:text-5xl md:text-6xl text-[#0326fc] block mb-4 sm:mb-6 md:mb-8">◈</span>
+          <h3 class="text-2xl sm:text-3xl font-bold mb-2 sm:mb-3 md:mb-4">Mission</h3>
+          <p class="text-white/40 text-sm sm:text-base md:text-lg">Engineer with soul. We merge hard systems thinking with expressive, human-centered design.</p>
+        </div>
+      </section>
+
+      <!-- Timeline animation -->
+      <section class="max-w-7xl mx-auto py-16 sm:py-20 md:py-32">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-10 sm:mb-16 md:mb-20 load-reveal">The journey ⏤</h2>
+        <div class="relative">
+          <div class="absolute left-4 sm:left-6 md:left-8 top-0 bottom-0 w-px bg-[#0326fc] opacity-30"></div>
+          <div class="space-y-12 sm:space-y-16 md:space-y-20">
+            <div class="flex gap-4 sm:gap-6 md:gap-8 load-reveal">
+              <div class="timeline-dot mt-1"></div>
+              <div>
+                <span class="text-[#0326fc] text-xl sm:text-2xl font-bold">2022</span>
+                <h4 class="text-xl sm:text-2xl md:text-3xl font-bold mt-1 sm:mt-2">The Idea Was Born</h4>
+                <p class="text-white/40 text-sm sm:text-base md:text-lg max-w-2xl">2022 wasn’t about launching it was about learning what greatness actually demands.</p>
+              </div>
+            </div>
+            <div class="flex gap-4 sm:gap-6 md:gap-8 load-reveal" style="transition-delay:0.2s;">
+              <div class="timeline-dot mt-1"></div>
+              <div>
+                <span class="text-[#0326fc] text-xl sm:text-2xl font-bold">2023</span>
+                <h4 class="text-xl sm:text-2xl md:text-3xl font-bold mt-1 sm:mt-2">Research & Skill Mastery</h4>
+                <p class="text-white/40 text-sm sm:text-base md:text-lg max-w-2xl">While others were rushing to start, I was preparing to build something that lasts.</p>
+              </div>
+            </div>
+            <div class="flex gap-4 sm:gap-6 md:gap-8 load-reveal" style="transition-delay:0.2s;">
+              <div class="timeline-dot mt-1"></div>
+              <div>
+                <span class="text-[#0326fc] text-xl sm:text-2xl font-bold">2024</span>
+                <h4 class="text-xl sm:text-2xl md:text-3xl font-bold mt-1 sm:mt-2">codeinl∞︎︎p
+ founded</h4>
+                <p class="text-white/40 text-sm sm:text-base md:text-lg max-w-2xl">2024 was the year vision turned into reality.</p>
+              </div>
+            </div>
+            <div class="flex gap-4 sm:gap-6 md:gap-8 load-reveal" style="transition-delay:0.4s;">
+              <div class="timeline-dot mt-1"></div>
+              <div>
+                <span class="text-[#0326fc] text-xl sm:text-2xl font-bold">2025</span>
+                <h4 class="text-xl sm:text-2xl md:text-3xl font-bold mt-1 sm:mt-2">Talent Tree JP Founded</h4>
+                <p class="text-white/40 text-sm sm:text-base md:text-lg max-w-2xl">In 2025, we just build this as project.</p>
+              </div>
+            </div>
+            <div class="flex gap-4 sm:gap-6 md:gap-8 load-reveal" style="transition-delay:0.4s;">
+              <div class="timeline-dot mt-1"></div>
+              <div>
+                <span class="text-[#0326fc] text-xl sm:text-2xl font-bold">2026</span>
+                <h4 class="text-xl sm:text-2xl md:text-3xl font-bold mt-1 sm:mt-2">Growth & 50+ Projects Milestone</h4>
+                <p class="text-white/40 text-sm sm:text-base md:text-lg max-w-2xl">2024 - 2026 is proof that consistency compounds.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Skills / Expertise bars -->
+      <section class="max-w-7xl mx-auto py-16 sm:py-20 md:py-24 border-t border-white/10">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 sm:mb-12 md:mb-16 load-reveal">Our core powers</h2>
+        <div class="space-y-6 sm:space-y-8 md:space-y-10">
+          <div class="load-reveal">
+            <div class="flex justify-between text-sm sm:text-base md:text-lg mb-2"><span>Frontend Mastery</span> <span class="text-[#0326fc]">98%</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-width="98"></div></div>
+          </div>
+          <div class="load-reveal" style="transition-delay:0.1s;">
+            <div class="flex justify-between text-sm sm:text-base md:text-lg mb-2"><span>Backend / SaaS</span> <span class="text-[#0326fc]">90%</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-width="90"></div></div>
+          </div>
+          <div class="load-reveal" style="transition-delay:0.2s;">
+            <div class="flex justify-between text-sm sm:text-base md:text-lg mb-2"><span>WordPress development</span> <span class="text-[#0326fc]">96%</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-width="96"></div></div>
+          </div>
+          <div class="load-reveal" style="transition-delay:0.3s;">
+            <div class="flex justify-between text-sm sm:text-base md:text-lg mb-2"><span>Strategic product thinking</span> <span class="text-[#0326fc]">91%</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-width="91"></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="border-t border-white/5 py-12 sm:py-16 md:py-20 px-4 sm:px-6">
+        <div class="max-w-7xl mx-auto grid sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 md:gap-12">
+          <div class="sm:col-span-2">
+            <div class="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">codeinl∞︎︎p
+</div>
+            <p class="text-white/40 text-xs sm:text-sm max-w-md">We Build Scalable
+Web & WordPress Solutions</p>
+          </div>
+          <div>
+            <h6 class="text-xs sm:text-sm text-white/40 mb-3 sm:mb-6">SOCIAL</h6>
+            <ul class="space-y-2 sm:space-y-3 text-white/70 text-sm sm:text-base">
+              <li><a href="https://www.linkedin.com/company/codeinloop/" class="hover:text-white transition">LinkedIn</a></li>
+              <li><a href="#" class="hover:text-white transition">X / Twitter</a></li>
+            </ul>
+          </div>
+          <div>
+            <h6 class="text-xs sm:text-sm text-white/40 mb-3 sm:mb-6">INQUIRIES</h6>
+            <ul class="space-y-2 sm:space-y-3 text-white/70 text-sm sm:text-base">
+              <li><a href="mailto:inquiry.codeinloop@gmail.com" class="hover:text-white transition">inquiry.codeinloop@gmail.com</a></li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    window.addEventListener('load', function() {
+      document.getElementById('pageWrapper').style.opacity = '1';
+      document.body.classList.add('loaded');
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Animate skill bars
+      document.querySelectorAll('.skill-fill').forEach(bar => {
+        const width = bar.getAttribute('data-width') + '%';
+        gsap.to(bar, {
+          width: width,
+          duration: 1.5,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: bar,
+            start: 'top 85%',
+            once: true
+          }
+        });
+      });
+
+      // Cursor
+      const dot = document.getElementById('cursorDot');
+      const ring = document.getElementById('cursorRing');
+      document.addEventListener('mousemove', (e) => {
+        dot.style.transform = `translate(${e.clientX-4}px, ${e.clientY-4}px)`;
+        ring.style.transform = `translate(${e.clientX-20}px, ${e.clientY-20}px)`;
+      });
+
+      // Mobile menu
+      const menuBtn = document.querySelector('button.md\\:hidden');
+      const navLinks = document.querySelector('.hidden.md\\:flex');
+      if (menuBtn && navLinks) {
+        menuBtn.addEventListener('click', () => {
+          navLinks.classList.toggle('hidden');
+          navLinks.classList.toggle('flex');
+          navLinks.classList.toggle('flex-col');
+          navLinks.classList.toggle('absolute');
+          navLinks.classList.toggle('top-20');
+          navLinks.classList.toggle('left-0');
+          navLinks.classList.toggle('w-full');
+          navLinks.classList.toggle('glass-card');
+          navLinks.classList.toggle('p-6');
+          navLinks.classList.toggle('space-x-0');
+          navLinks.classList.toggle('space-y-4');
+          navLinks.classList.toggle('z-50');
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>codeinloop | We craft high-performance websites & WordPress solutions that drive real business growth.</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <style>
+    * { cursor: none; margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Space Grotesk', sans-serif; background: #000; color: #fff; overflow-x: hidden; }
+    .cursor-dot, .cursor-ring { position: fixed; border-radius: 50%; pointer-events: none; z-index: 9999; }
+    .cursor-dot { width: 8px; height: 8px; background: white; mix-blend-mode: difference; }
+    .cursor-ring { width: 40px; height: 40px; border: 1.5px solid rgba(255,255,255,0.3); z-index: 9998; transition: all 0.2s; }
+    .glass-card { background: rgba(255,255,255,0.02); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.03); border-radius: 2rem; }
+    .input-field { background: transparent; border: none; border-bottom: 1px solid rgba(255,255,255,0.2); padding: 12px 0; width: 100%; color: white; outline: none; transition: border 0.2s; font-size: 1rem; }
+    .input-field:focus { border-bottom-color: #0326fc; }
+    .floating-label { position: relative; margin-top: 20px; }
+    .floating-label label { position: absolute; left: 0; top: 12px; color: rgba(255,255,255,0.4); transition: 0.2s; pointer-events: none; font-size: 1rem; }
+    .input-field:focus + label, .input-field:not(:placeholder-shown) + label { top: -12px; font-size: 0.8rem; color: #0326fc; }
+    .map-placeholder { background: #0a0a0a; height: 200px; border-radius: 2rem; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.2); border: 1px solid #ffffff10; }
+    @media (min-width: 768px) { .map-placeholder { height: 300px; } }
+    .load-reveal { opacity: 0; transform: translateY(20px); transition: 1s; }
+    .loaded .load-reveal { opacity: 1; transform: translateY(0); }
+    @media (max-width: 768px) {
+      nav { padding: 12px 20px !important; }
+      main { padding-top: 100px !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+  <div id="pageWrapper" style="opacity:0; transition:1.5s">
+    <!-- FIXED NAVBAR - Perfectly centered, no right shift -->
+<nav class="fixed top-4 sm:top-6 left-0 right-0 mx-auto w-[95%] sm:w-[90%] max-w-7xl z-50 glass-card px-4 sm:px-8 py-3 sm:py-4 flex items-center justify-between load-reveal" style="left: 50%; transform: translateX(-50%);">
+  <div class="text-xl sm:text-2xl font-bold tracking-tight text-white whitespace-nowrap">codeinl∞︎︎p</div>
+  
+  <!-- Desktop Navigation - Centered properly -->
+  <div class="hidden md:flex items-center justify-center space-x-6 lg:space-x-10 text-sm font-medium text-white/80 absolute left-1/2 transform -translate-x-1/2">
+    <a href="index.html" class="hover:text-white transition-colors whitespace-nowrap">Home</a>
+    <a href="about.html" class="hover:text-white transition-colors whitespace-nowrap">About</a>
+    <a href="services.html" class="hover:text-white transition-colors whitespace-nowrap">Services</a>
+    <a href="projects.html" class="hover:text-white transition-colors whitespace-nowrap">Projects</a>
+    <a href="pricing.html" class="hover:text-white transition-colors whitespace-nowrap">Pricing</a>
+    <a href="contact.html" class="hover:text-white transition-colors whitespace-nowrap">Contact</a>
+  </div>
+  
+  <!-- Right side buttons -->
+  <div class="flex items-center gap-2 sm:gap-4 ml-auto">
+    <a href="https://calendly.com/projects-abdulhannan" class="hidden sm:inline-block text-sm font-medium border border-white/20 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full hover:bg-white hover:text-black transition-all whitespace-nowrap">Let's talk</a>
+    <!-- Mobile menu button -->
+    <button class="md:hidden text-white text-2xl focus:outline-none">☰</button>
+  </div>
+</nav>
+
+<!-- Mobile Menu Dropdown (hidden by default) -->
+<div class="fixed top-20 left-1/2 transform -translate-x-1/2 w-[95%] max-w-7xl z-40 hidden md:hidden mobile-menu">
+  <div class="glass-card p-6 flex flex-col space-y-4 text-center">
+    <a href="index.html" class="text-white/80 hover:text-white py-2 transition">Home</a>
+    <a href="about.html" class="text-white/80 hover:text-white py-2 transition">About</a>
+    <a href="services.html" class="text-white/80 hover:text-white py-2 transition">Services</a>
+    <a href="projects.html" class="text-white/80 hover:text-white py-2 transition">Projects</a>
+    <a href="pricing.html" class="text-white/80 hover:text-white py-2 transition">Pricing</a>
+    <a href="contact.html" class="text-white/80 hover:text-white py-2 transition">Contact</a>
+    <a href="contact.html" class="sm:hidden border border-white/20 px-4 py-2 rounded-full hover:bg-white hover:text-black transition mt-2">Let's talk</a>
+  </div>
+</div>
+
+    <main class="pt-24 sm:pt-28 md:pt-32 lg:pt-36 px-4 sm:px-6 max-w-7xl mx-auto">
+      <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold load-reveal">Let's create<span class="text-[#0326fc]">.</span></h1>
+      
+      <div class="grid lg:grid-cols-2 gap-8 sm:gap-10 md:gap-16 lg:gap-20 mt-10 sm:mt-12 md:mt-16 lg:mt-20">
+        <!-- Contact form -->
+        <div class="glass-card p-6 sm:p-8 md:p-10 lg:p-12 load-reveal">
+          <form id="contactForm" onsubmit="event.preventDefault(); alert('Message sent (demo)');">
+            <div class="floating-label">
+              <input type="text" id="name" class="input-field" placeholder=" " required>
+              <label for="name">Full name</label>
+            </div>
+            <div class="floating-label">
+              <input type="email" id="email" class="input-field" placeholder=" " required>
+              <label for="email">Email address</label>
+            </div>
+            <div class="floating-label">
+              <textarea id="message" rows="3" class="input-field" placeholder=" " required></textarea>
+              <label for="message">Tell us about your venture</label>
+            </div>
+            <button type="submit" class="w-full py-3 sm:py-4 md:py-5 mt-6 sm:mt-8 md:mt-10 bg-[#0326fc] rounded-full text-base sm:text-lg font-semibold hover:bg-white hover:text-[#0326fc] transition">Send message →</button>
+          </form>
+        </div>
+        
+        <!-- Contact info + map -->
+        <div>
+          <div class="glass-card p-6 sm:p-8 md:p-10 lg:p-12 load-reveal" style="transition-delay:0.2s;">
+            <h3 class="text-2xl sm:text-3xl font-bold">Contact</h3>
+            <div class="mt-4 sm:mt-6 md:mt-8 space-y-3 sm:space-y-4 md:space-y-6 text-white/60 text-sm sm:text-base">
+              <p>✉️ inquiry@codeinloop.com</p>
+              <p>📞 +92 370 3148 937</p>
+              <p>📞 +92 317 1243 725</p>
+              <p>📍 Karachi, PK</p>
+            </div>
+          </div>
+          <div class="map-placeholder mt-4 sm:mt-6 md:mt-8 glass-card load-reveal overflow-hidden rounded-2xl" style="transition-delay:0.4s;">
+  
+  <iframe 
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d924237.7097540089!2d66.4959539227841!3d25.192983650620572!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33e06651d4bbf%3A0x9cf92f44555a0c23!2sKarachi%2C%20Pakistan!5e0!3m2!1sen!2s!4v1771387767922!5m2!1sen!2s"
+    class="w-full h-[300px] sm:h-[400px] md:h-[450px]"
+    style="border:0;"
+    allowfullscreen=""
+    loading="lazy">
+  </iframe>
+
+</div>
+
+        </div>
+      </div>
+    </main>
+
+    <footer class="border-t border-white/5 py-12 sm:py-16 md:py-20 px-4 sm:px-6 mt-16 sm:mt-20 md:mt-32">
+      <div class="max-w-7xl mx-auto text-white/30 text-center text-sm sm:text-base">© 2026 codeinloop. All rights reserved.</div>
+    </footer>
+  </div>
+
+  <script>
+    window.addEventListener('load', function() {
+      document.getElementById('pageWrapper').style.opacity = '1';
+      document.body.classList.add('loaded');
+      
+      const dot = document.getElementById('cursorDot');
+      const ring = document.getElementById('cursorRing');
+      document.addEventListener('mousemove', (e) => {
+        dot.style.transform = `translate(${e.clientX-4}px, ${e.clientY-4}px)`;
+        ring.style.transform = `translate(${e.clientX-20}px, ${e.clientY-20}px)`;
+      });
+
+      // Mobile menu
+      const menuBtn = document.querySelector('button.md\\:hidden');
+      const navLinks = document.querySelector('.hidden.md\\:flex');
+      if (menuBtn && navLinks) {
+        menuBtn.addEventListener('click', () => {
+          navLinks.classList.toggle('hidden');
+          navLinks.classList.toggle('flex');
+          navLinks.classList.toggle('flex-col');
+          navLinks.classList.toggle('absolute');
+          navLinks.classList.toggle('top-20');
+          navLinks.classList.toggle('left-0');
+          navLinks.classList.toggle('w-full');
+          navLinks.classList.toggle('glass-card');
+          navLinks.classList.toggle('p-6');
+          navLinks.classList.toggle('space-x-0');
+          navLinks.classList.toggle('space-y-4');
+          navLinks.classList.toggle('z-50');
+        });
+      }
+    });
+  </script>
+</body>
+</html>
