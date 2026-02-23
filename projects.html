@@ -9,64 +9,172 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <style>
-    * { cursor: none; margin: 0; padding: 0; box-sizing: border-box; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    /* Custom cursor - sirf desktop par */
+    @media (min-width: 768px) {
+      * { cursor: none; }
+      .cursor-dot, .cursor-ring { position: fixed; border-radius: 50%; pointer-events: none; z-index: 99999; }
+      .cursor-dot { width: 8px; height: 8px; background: white; mix-blend-mode: difference; }
+      .cursor-ring { width: 40px; height: 40px; border: 1.5px solid rgba(255,255,255,0.3); z-index: 99998; transition: all 0.2s; }
+    }
+    
     body { font-family: 'Space Grotesk', sans-serif; background: #000; color: #fff; overflow-x: hidden; }
-    .cursor-dot, .cursor-ring { position: fixed; border-radius: 50%; pointer-events: none; z-index: 9999; }
-    .cursor-dot { width: 8px; height: 8px; background: white; mix-blend-mode: difference; }
-    .cursor-ring { width: 40px; height: 40px; border: 1.5px solid rgba(255,255,255,0.3); z-index: 9998; transition: all 0.2s; }
     .glass-card { background: rgba(255,255,255,0.02); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.03); border-radius: 2rem; }
-    .project-item { position: relative; overflow: hidden; border-radius: 2rem; aspect-ratio: 4/3; }
+    .project-item { position: relative; overflow: hidden; border-radius: 2rem; aspect-ratio: 4/3; cursor: pointer; }
     .project-overlay { position: absolute; inset: 0; background: linear-gradient(to top, #0326fc, transparent); opacity: 0; transition: opacity 0.4s; display: flex; align-items: flex-end; padding: 1.5rem; }
     .project-item:hover .project-overlay { opacity: 1; }
+    .saas-project .project-overlay { background: linear-gradient(to top, #0326fc, #000000cc); }
     .filter-btn { padding: 6px 16px; border-radius: 60px; border: 1px solid rgba(255,255,255,0.1); transition: all 0.2s; cursor: pointer; font-size: 0.9rem; }
     @media (min-width: 640px) { .filter-btn { padding: 8px 24px; } }
     .filter-active { background: #0326fc; border-color: #0326fc; }
     .load-reveal { opacity: 0; transform: translateY(20px); transition: 1s; }
     .loaded .load-reveal { opacity: 1; transform: translateY(0); }
+    
+    /* Modal Styles */
+    .payment-modal { 
+      position: fixed; 
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      height: 100%; 
+      background: rgba(0,0,0,0.95); 
+      backdrop-filter: blur(10px); 
+      z-index: 100000; 
+      display: none; 
+      justify-content: center; 
+      align-items: center; 
+      padding: 20px; 
+    }
+    
+    /* Modal ke andar cursor normal */
+    .payment-modal, .payment-modal * {
+      cursor: auto !important;
+    }
+    
+    .payment-card { 
+      background: rgba(15,15,15,0.98); 
+      border: 1px solid rgba(255,255,255,0.1); 
+      border-radius: 2rem; 
+      padding: 2rem; 
+      max-width: 600px; 
+      width: 100%; 
+      max-height: 90vh; 
+      overflow-y: auto; 
+      position: relative;
+      z-index: 100001;
+    }
+    
+    .form-input { 
+      background: rgba(255,255,255,0.05); 
+      border: 1px solid rgba(255,255,255,0.1); 
+      border-radius: 1rem; 
+      padding: 1rem; 
+      color: white; 
+      width: 100%; 
+      margin-bottom: 1rem; 
+    }
+    .form-input:focus { outline: none; border-color: #0326fc; }
+    .form-input:hover, .form-input:focus, .form-input:active {
+      cursor: text !important;
+    }
+    
+    .btn-primary { 
+      background: #0326fc; 
+      color: white; 
+      padding: 1rem 2rem; 
+      border-radius: 3rem; 
+      font-weight: 500; 
+      transition: all 0.3s; 
+      border: none; 
+      width: 100%; 
+      cursor: pointer !important;
+    }
+    .btn-primary:hover { background: #021bb3; transform: scale(0.98); }
+    
+    .bank-detail { 
+      background: rgba(255,255,255,0.03); 
+      border: 1px solid rgba(255,255,255,0.1); 
+      border-radius: 1rem; 
+      padding: 1.5rem; 
+      margin-bottom: 2rem; 
+    }
+    
+    .close-modal { 
+      position: absolute; 
+      top: 20px; 
+      right: 30px; 
+      font-size: 40px; 
+      color: white; 
+      cursor: pointer !important;
+      z-index: 100002; 
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      transition: 0.3s;
+    }
+    
+    .close-modal:hover {
+      background: rgba(255,255,255,0.2);
+      transform: scale(1.1);
+    }
+    
+    /* Modal ke andar custom cursor hide */
+    .modal-open .cursor-dot,
+    .modal-open .cursor-ring {
+      display: none !important;
+    }
+    
     @media (max-width: 768px) {
       nav { padding: 12px 20px !important; }
       main { padding-top: 100px !important; }
+      .close-modal { top: 10px; right: 20px; }
     }
   </style>
 </head>
 <body>
+  <!-- Custom Cursor Elements -->
   <div class="cursor-dot" id="cursorDot"></div>
   <div class="cursor-ring" id="cursorRing"></div>
+  
   <div id="pageWrapper" style="opacity:0; transition:1.5s">
-    <!-- FIXED NAVBAR - Perfectly centered, no right shift -->
-<nav class="fixed top-4 sm:top-6 left-0 right-0 mx-auto w-[95%] sm:w-[90%] max-w-7xl z-50 glass-card px-4 sm:px-8 py-3 sm:py-4 flex items-center justify-between load-reveal" style="left: 50%; transform: translateX(-50%);">
-  <div class="text-xl sm:text-2xl font-bold tracking-tight text-white whitespace-nowrap">codeinl∞︎︎p</div>
-  
-  <!-- Desktop Navigation - Centered properly -->
-  <div class="hidden md:flex items-center justify-center space-x-6 lg:space-x-10 text-sm font-medium text-white/80 absolute left-1/2 transform -translate-x-1/2">
-    <a href="index.html" class="hover:text-white transition-colors whitespace-nowrap">Home</a>
-    <a href="about.html" class="hover:text-white transition-colors whitespace-nowrap">About</a>
-    <a href="services.html" class="hover:text-white transition-colors whitespace-nowrap">Services</a>
-    <a href="projects.html" class="hover:text-white transition-colors whitespace-nowrap">Projects</a>
-    <a href="pricing.html" class="hover:text-white transition-colors whitespace-nowrap">Pricing</a>
-    <a href="contact.html" class="hover:text-white transition-colors whitespace-nowrap">Contact</a>
-  </div>
-  
-  <!-- Right side buttons -->
-  <div class="flex items-center gap-2 sm:gap-4 ml-auto">
-    <a href="https://calendly.com/projects-abdulhannan" class="hidden sm:inline-block text-sm font-medium border border-white/20 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full hover:bg-white hover:text-black transition-all whitespace-nowrap">Let's talk</a>
-    <!-- Mobile menu button -->
-    <button class="md:hidden text-white text-2xl focus:outline-none">☰</button>
-  </div>
-</nav>
+    <!-- FIXED NAVBAR -->
+    <nav class="fixed top-4 sm:top-6 left-0 right-0 mx-auto w-[95%] sm:w-[90%] max-w-7xl z-50 glass-card px-4 sm:px-8 py-3 sm:py-4 flex items-center justify-between load-reveal" style="left: 50%; transform: translateX(-50%);">
+      <div class="text-xl sm:text-2xl font-bold tracking-tight text-white whitespace-nowrap">codeinl∞︎︎p</div>
+      
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center justify-center space-x-6 lg:space-x-10 text-sm font-medium text-white/80 absolute left-1/2 transform -translate-x-1/2">
+        <a href="index.html" class="hover:text-white transition-colors whitespace-nowrap">Home</a>
+        <a href="about.html" class="hover:text-white transition-colors whitespace-nowrap">About</a>
+        <a href="services.html" class="hover:text-white transition-colors whitespace-nowrap">Services</a>
+        <a href="projects.html" class="hover:text-white transition-colors whitespace-nowrap">Projects</a>
+        <a href="pricing.html" class="hover:text-white transition-colors whitespace-nowrap">Pricing</a>
+        <a href="contact.html" class="hover:text-white transition-colors whitespace-nowrap">Contact</a>
+      </div>
+      
+      <!-- Right side buttons -->
+      <div class="flex items-center gap-2 sm:gap-4 ml-auto">
+        <a href="https://calendly.com/projects-abdulhannan" class="hidden sm:inline-block text-sm font-medium border border-white/20 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full hover:bg-white hover:text-black transition-all whitespace-nowrap">Let's talk</a>
+        <button class="md:hidden text-white text-2xl focus:outline-none">☰</button>
+      </div>
+    </nav>
 
-<!-- Mobile Menu Dropdown (hidden by default) -->
-<div class="fixed top-20 left-1/2 transform -translate-x-1/2 w-[95%] max-w-7xl z-40 hidden md:hidden mobile-menu">
-  <div class="glass-card p-6 flex flex-col space-y-4 text-center">
-    <a href="index.html" class="text-white/80 hover:text-white py-2 transition">Home</a>
-    <a href="about.html" class="text-white/80 hover:text-white py-2 transition">About</a>
-    <a href="services.html" class="text-white/80 hover:text-white py-2 transition">Services</a>
-    <a href="projects.html" class="text-white/80 hover:text-white py-2 transition">Projects</a>
-    <a href="pricing.html" class="text-white/80 hover:text-white py-2 transition">Pricing</a>
-    <a href="contact.html" class="text-white/80 hover:text-white py-2 transition">Contact</a>
-    <a href="https://calendly.com/projects-abdulhannan" class="sm:hidden border border-white/20 px-4 py-2 rounded-full hover:bg-white hover:text-black transition mt-2">Let's talk</a>
-  </div>
-</div>
+    <!-- Mobile Menu -->
+    <div class="fixed top-20 left-1/2 transform -translate-x-1/2 w-[95%] max-w-7xl z-40 hidden md:hidden mobile-menu">
+      <div class="glass-card p-6 flex flex-col space-y-4 text-center">
+        <a href="index.html" class="text-white/80 hover:text-white py-2 transition">Home</a>
+        <a href="about.html" class="text-white/80 hover:text-white py-2 transition">About</a>
+        <a href="services.html" class="text-white/80 hover:text-white py-2 transition">Services</a>
+        <a href="projects.html" class="text-white/80 hover:text-white py-2 transition">Projects</a>
+        <a href="pricing.html" class="text-white/80 hover:text-white py-2 transition">Pricing</a>
+        <a href="contact.html" class="text-white/80 hover:text-white py-2 transition">Contact</a>
+        <a href="https://calendly.com/projects-abdulhannan" class="sm:hidden border border-white/20 px-4 py-2 rounded-full hover:bg-white hover:text-black transition mt-2">Let's talk</a>
+      </div>
+    </div>
 
     <main class="pt-24 sm:pt-28 md:pt-32 lg:pt-36 px-4 sm:px-6">
       <div class="max-w-7xl mx-auto">
@@ -82,135 +190,155 @@
 
         <!-- Project grid -->
         <div class="grid sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 mt-8 sm:mt-12 md:mt-20 projects-grid">
-          <!-- <div class="project-item glass-card load-reveal" data-category="web">
-            <div class="w-full h-full bg-[#111] flex items-center justify-center text-[#0326fc] text-xl sm:text-2xl">NEXUS WEB</div>
-            <div class="project-overlay"><div><h3 class="text-xl sm:text-2xl md:text-3xl font-bold">Nexus Bank</h3><p class="text-white/70 text-sm sm:text-base">Web · Next.js, Three.js</p></div></div>
-          </div> -->
-          <div class="project-item glass-card load-reveal relative overflow-hidden rounded-2xl" data-category="saas">
-  <!-- Project Image -->
-  <img 
-  src="images/resu.png" 
-  alt="Resume Analyzer Using AI
-"
-  class="w-full h-full object-cover absolute inset-0 transition duration-700 hover:scale-110"
-/>
-  <!-- Overlay -->
-  <div class="project-overlay absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 hover:opacity-100 transition duration-500">
-    <div class="text-center px-4">
-      <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-white">Resume Analyzer Using AI</h3>
-      <p class="text-white/70 text-sm sm:text-base">MERN Stack</p>
-    </div>
-  </div>
-</div>
+          <!-- RESUME ANALYZER - SAAS -->
+          <div class="project-item saas-project glass-card load-reveal relative overflow-hidden rounded-2xl" data-category="saas" onclick="openPaymentModal('Resume Analyzer Using AI', 12999)">
+            <img src="images/resu.png" alt="Resume Analyzer Using AI" class="w-full h-full object-cover absolute inset-0 transition duration-700 hover:scale-110"/>
+            <div class="project-overlay absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 hover:opacity-100 transition duration-500">
+              <div class="text-center px-4">
+                <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-white">Resume Analyzer Using AI</h3>
+                <p class="text-white/70 text-sm sm:text-base">MERN Stack</p>
+                <div class="mt-4 flex items-center justify-center gap-4">
+                  <span class="text-2xl font-bold text-[#0326fc]">RS 12999</span>
+                  <span class="bg-[#0326fc] px-4 py-2 rounded-full text-sm">Buy Now →</span>
+                </div>
+              </div>
+            </div>
+          </div>
 
-<div class="project-item glass-card load-reveal relative overflow-hidden rounded-2xl" data-category="wordpress">
-  <!-- Project Image -->
-  <img 
-  src="images/talent.png" 
-  alt="Talent Tree JP
-"
-  class="w-full h-full object-cover absolute inset-0 transition duration-700 hover:scale-110"
-/>
-  <!-- Overlay -->
-  <div class="project-overlay absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 hover:opacity-100 transition duration-500">
-    <div class="text-center px-4">
-      <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-white">Talent Tree JP</h3>
-      <p class="text-white/70 text-sm sm:text-base">WordPress</p>
-    </div>
-  </div>
-</div>
+          <!-- TALENT TREE JP - WORDPRESS -->
+          <div class="project-item glass-card load-reveal relative overflow-hidden rounded-2xl" data-category="wordpress">
+            <img src="images/talent.png" alt="Talent Tree JP" class="w-full h-full object-cover absolute inset-0 transition duration-700 hover:scale-110"/>
+            <div class="project-overlay absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 hover:opacity-100 transition duration-500">
+              <div class="text-center px-4">
+                <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-white">Talent Tree JP</h3>
+                <p class="text-white/70 text-sm sm:text-base">WordPress</p>
+              </div>
+            </div>
+          </div>
 
-<div class="project-item glass-card load-reveal relative overflow-hidden rounded-2xl" data-category="saas">
-  <!-- Project Image -->
-  <img 
-  src="images/dai.png" 
-  alt="Daily Expense Tracker
+          <!-- DAILY EXPENSE TRACKER - SAAS -->
+          <div class="project-item saas-project glass-card load-reveal relative overflow-hidden rounded-2xl" data-category="saas" onclick="openPaymentModal('Daily Expense Tracker', 8999)">
+            <img src="images/dai.png" alt="Daily Expense Tracker" class="w-full h-full object-cover absolute inset-0 transition duration-700 hover:scale-110"/>
+            <div class="project-overlay absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 hover:opacity-100 transition duration-500">
+              <div class="text-center px-4">
+                <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-white">Daily Expense Tracker</h3>
+                <p class="text-white/70 text-sm sm:text-base">Full Stack</p>
+                <div class="mt-4 flex items-center justify-center gap-4">
+                  <span class="text-2xl font-bold text-[#0326fc]">RS 8999</span>
+                  <span class="bg-[#0326fc] px-4 py-2 rounded-full text-sm">Buy Now →</span>
+                </div>
+              </div>
+            </div>
+          </div>
 
-"
-  class="w-full h-full object-cover absolute inset-0 transition duration-700 hover:scale-110"
-/>
-  <!-- Overlay -->
-  <div class="project-overlay absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 hover:opacity-100 transition duration-500">
-    <div class="text-center px-4">
-      <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-white">Daily Expense Tracker</h3>
-      <p class="text-white/70 text-sm sm:text-base">Full Stack</p>
-    </div>
-  </div>
-</div>
-<div class="project-item glass-card load-reveal relative overflow-hidden rounded-2xl" data-category="web">
-  <!-- Project Image -->
-  <img 
-  src="images/voi.png" 
-  alt="Voice-Controlled TO-DO List
-"
-  class="w-full h-full object-cover absolute inset-0 transition duration-700 hover:scale-110"
-/>
-  <!-- Overlay -->
-  <div class="project-overlay absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 hover:opacity-100 transition duration-500">
-    <div class="text-center px-4">
-      <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-white">Voice-Controlled TO-DO List
-</h3>
-      <p class="text-white/70 text-sm sm:text-base">Web</p>
-    </div>
-  </div>
-</div>
-<div class="project-item glass-card load-reveal relative overflow-hidden rounded-2xl" data-category="saas">
-  <!-- Project Image -->
-  <img 
-  src="images/sch.png" 
-  alt="School Fee Management System
-"
-  class="w-full h-full object-cover absolute inset-0 transition duration-700 hover:scale-110"
-/>
-  <!-- Overlay -->
-  <div class="project-overlay absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 hover:opacity-100 transition duration-500">
-    <div class="text-center px-4">
-      <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-white">School Fee Management System
-</h3>
-      <p class="text-white/70 text-sm sm:text-base">Full Stack</p>
-    </div>
-  </div>
-</div>
-<div class="project-item glass-card load-reveal relative overflow-hidden rounded-2xl" data-category="saas">
-  <!-- Project Image -->
-  <img 
-  src="images/attendance.png" 
-  alt="Attendance Management System
+          <!-- VOICE-CONTROLLED TO-DO - WEB -->
+          <div class="project-item glass-card load-reveal relative overflow-hidden rounded-2xl" data-category="web">
+            <img src="images/voi.png" alt="Voice-Controlled TO-DO List" class="w-full h-full object-cover absolute inset-0 transition duration-700 hover:scale-110"/>
+            <div class="project-overlay absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 hover:opacity-100 transition duration-500">
+              <div class="text-center px-4">
+                <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-white">Voice-Controlled TO-DO List</h3>
+                <p class="text-white/70 text-sm sm:text-base">Web</p>
+              </div>
+            </div>
+          </div>
 
-"
-  class="w-full h-full object-cover absolute inset-0 transition duration-700 hover:scale-110"
-/>
-  <!-- Overlay -->
-  <div class="project-overlay absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 hover:opacity-100 transition duration-500">
-    <div class="text-center px-4">
-      <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-white">Attendance Management System</h3>
-      <p class="text-white/70 text-sm sm:text-base">Full Stack</p>
-    </div>
-  </div>
-</div>
-          <!-- <div class="project-item glass-card load-reveal" data-category="web">
-            <div class="w-full h-full bg-[#111] flex items-center justify-center text-[#0326fc] text-xl sm:text-2xl">NEXUS WEB</div>
-            <div class="project-overlay"><div><h3 class="text-xl sm:text-2xl md:text-3xl font-bold">Nexus Bank</h3><p class="text-white/70 text-sm sm:text-base">Web · Next.js, Three.js</p></div></div>
+          <!-- SCHOOL FEE MANAGEMENT - SAAS -->
+          <div class="project-item saas-project glass-card load-reveal relative overflow-hidden rounded-2xl" data-category="saas" onclick="openPaymentModal('School Fee Management System', 14999)">
+            <img src="images/sch.png" alt="School Fee Management System" class="w-full h-full object-cover absolute inset-0 transition duration-700 hover:scale-110"/>
+            <div class="project-overlay absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 hover:opacity-100 transition duration-500">
+              <div class="text-center px-4">
+                <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-white">School Fee Management System</h3>
+                <p class="text-white/70 text-sm sm:text-base">Full Stack</p>
+                <div class="mt-4 flex items-center justify-center gap-4">
+                  <span class="text-2xl font-bold text-[#0326fc]">RS 14999</span>
+                  <span class="bg-[#0326fc] px-4 py-2 rounded-full text-sm">Buy Now →</span>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="project-item glass-card load-reveal" data-category="web">
-            <div class="w-full h-full bg-[#111] flex items-center justify-center text-[#0326fc] text-xl sm:text-2xl">NEXUS WEB</div>
-            <div class="project-overlay"><div><h3 class="text-xl sm:text-2xl md:text-3xl font-bold">Nexus Bank</h3><p class="text-white/70 text-sm sm:text-base">Web · Next.js, Three.js</p></div></div>
+
+          <!-- ATTENDANCE MANAGEMENT - SAAS -->
+          <div class="project-item saas-project glass-card load-reveal relative overflow-hidden rounded-2xl" data-category="saas" onclick="openPaymentModal('Attendance Management System', 9999)">
+            <img src="images/attendance.png" alt="Attendance Management System" class="w-full h-full object-cover absolute inset-0 transition duration-700 hover:scale-110"/>
+            <div class="project-overlay absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 hover:opacity-100 transition duration-500">
+              <div class="text-center px-4">
+                <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-white">Attendance Management System</h3>
+                <p class="text-white/70 text-sm sm:text-base">Full Stack</p>
+                <div class="mt-4 flex items-center justify-center gap-4">
+                  <span class="text-2xl font-bold text-[#0326fc]">RS 9999</span>
+                  <span class="bg-[#0326fc] px-4 py-2 rounded-full text-sm">Buy Now →</span>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="project-item glass-card load-reveal" data-category="saas">
-            <div class="w-full h-full bg-[#222] flex items-center justify-center text-[#0326fc] text-xl sm:text-2xl">ANALYTICA</div>
-            <div class="project-overlay"><div><h3 class="text-xl sm:text-2xl md:text-3xl font-bold">Analytica AI</h3><p class="text-white/70 text-sm sm:text-base">SaaS · dashboard</p></div></div>
-          </div>
-          <div class="project-item glass-card load-reveal" data-category="wordpress">
-            <div class="w-full h-full bg-[#333] flex items-center justify-center text-[#0326fc] text-xl sm:text-2xl">AVANT GARDE</div>
-            <div class="project-overlay"><div><h3 class="text-xl sm:text-2xl md:text-3xl font-bold">Avant Garde</h3><p class="text-white/70 text-sm sm:text-base">WordPress · headless</p></div></div>
-          </div>
-          <div class="project-item glass-card load-reveal" data-category="saas">
-            <div class="w-full h-full bg-[#444] flex items-center justify-center text-[#0326fc] text-xl sm:text-2xl">FLOW OPS</div>
-            <div class="project-overlay"><div><h3 class="text-xl sm:text-2xl md:text-3xl font-bold">FlowOps</h3><p class="text-white/70 text-sm sm:text-base">SaaS · automation</p></div></div>
-          </div>
-        </div> -->
+        </div>
       </div>
     </main>
+
+    <!-- PAYMENT MODAL -->
+    <div id="paymentModal" class="payment-modal">
+      <span class="close-modal" onclick="closePaymentModal()">&times;</span>
+      <div class="payment-card">
+        <h2 class="text-3xl font-bold mb-2" id="modalProjectName">Complete Your Purchase</h2>
+        <p class="text-white/70 mb-6">Pay using bank transfer and submit your details below</p>
+        
+        <!-- Bank Account Details -->
+        <div class="bank-detail">
+          <h3 class="text-xl font-semibold mb-4 text-[#0326fc]">Bank Account Details</h3>
+          <div class="space-y-3">
+            <div class="flex justify-between items-center p-3 bg-white/5 rounded-lg">
+              <span class="text-white/70">Bank Name:</span>
+              <span class="font-mono">EasyPaisa</span>
+            </div>
+            <div class="flex justify-between items-center p-3 bg-white/5 rounded-lg">
+              <span class="text-white/70">Account Title:</span>
+              <span class="font-mono">Abdul Hannan</span>
+            </div>
+            <div class="flex justify-between items-center p-3 bg-white/5 rounded-lg">
+              <span class="text-white/70">Account Number:</span>
+              <span class="font-mono">1234-5678-9012-3456</span>
+            </div>
+            <div class="flex justify-between items-center p-3 bg-white/5 rounded-lg">
+              <span class="text-white/70">IBAN:</span>
+              <span class="font-mono">PK12ALFH1234567890123456</span>
+            </div>
+            <div class="flex justify-between items-center p-3 bg-white/5 rounded-lg">
+              <span class="text-white/70">Amount to Pay:</span>
+              <span class="font-mono text-[#0326fc] font-bold text-xl" id="modalPrice">RS 12999</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment Details Form -->
+        <form id="paymentForm" onsubmit="handlePaymentSubmit(event)">
+          <input type="text" placeholder="Your Full Name" class="form-input" required>
+          <input type="email" placeholder="Email Address" class="form-input" required>
+          <input type="tel" placeholder="Phone Number (with country code)" class="form-input" required>
+          <input type="text" placeholder="Transaction ID / Reference Number" class="form-input" required>
+          <div class="mb-4">
+            <label class="block text-white/70 mb-2">Payment Screenshot</label>
+            <input type="file" accept="image/*" class="form-input" required>
+          </div>
+          <textarea placeholder="Additional Notes (Optional)" class="form-input" rows="3"></textarea>
+          
+          <button type="submit" class="btn-primary mt-4">
+            Submit Payment Details
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- SUCCESS MODAL -->
+    <div id="successModal" class="payment-modal" style="display: none;">
+      <span class="close-modal" onclick="closeSuccessModal()">&times;</span>
+      <div class="payment-card text-center">
+        <div class="text-6xl mb-4">✅</div>
+        <h2 class="text-3xl font-bold mb-4">Payment Details Submitted!</h2>
+        <p class="text-white/70 mb-6">Thank you for your purchase. We'll verify your payment and send the project details to your email within 24 hours.</p>
+        <p class="text-white/50 mb-8">You'll receive a confirmation email shortly.</p>
+        <button onclick="closeSuccessModal()" class="btn-primary">Close</button>
+      </div>
+    </div>
 
     <footer class="border-t border-white/5 py-12 sm:py-16 md:py-20 px-4 sm:px-6 mt-16 sm:mt-20 md:mt-32">
       <div class="max-w-7xl mx-auto text-white/30 text-center text-sm sm:text-base">© 2026 codeinloop. All rights reserved.</div>
@@ -224,9 +352,28 @@
       
       const dot = document.getElementById('cursorDot');
       const ring = document.getElementById('cursorRing');
+      
+      // Mouse move cursor effect
       document.addEventListener('mousemove', (e) => {
-        dot.style.transform = `translate(${e.clientX-4}px, ${e.clientY-4}px)`;
-        ring.style.transform = `translate(${e.clientX-20}px, ${e.clientY-20}px)`;
+        // Check if modal is open
+        const paymentModal = document.getElementById('paymentModal');
+        const successModal = document.getElementById('successModal');
+        
+        if (paymentModal.style.display === 'flex' || successModal.style.display === 'flex') {
+          // Hide custom cursor when modal is open
+          if (dot) dot.style.display = 'none';
+          if (ring) ring.style.display = 'none';
+        } else {
+          // Show custom cursor when modal is closed
+          if (dot) {
+            dot.style.display = 'block';
+            dot.style.transform = `translate(${e.clientX-4}px, ${e.clientY-4}px)`;
+          }
+          if (ring) {
+            ring.style.display = 'block';
+            ring.style.transform = `translate(${e.clientX-20}px, ${e.clientY-20}px)`;
+          }
+        }
       });
 
       // Filter functionality
@@ -258,24 +405,80 @@
 
       // Mobile menu
       const menuBtn = document.querySelector('button.md\\:hidden');
-      const navLinks = document.querySelector('.hidden.md\\:flex');
-      if (menuBtn && navLinks) {
+      const mobileMenu = document.querySelector('.mobile-menu');
+      if (menuBtn && mobileMenu) {
         menuBtn.addEventListener('click', () => {
-          navLinks.classList.toggle('hidden');
-          navLinks.classList.toggle('flex');
-          navLinks.classList.toggle('flex-col');
-          navLinks.classList.toggle('absolute');
-          navLinks.classList.toggle('top-20');
-          navLinks.classList.toggle('left-0');
-          navLinks.classList.toggle('w-full');
-          navLinks.classList.toggle('glass-card');
-          navLinks.classList.toggle('p-6');
-          navLinks.classList.toggle('space-x-0');
-          navLinks.classList.toggle('space-y-4');
-          navLinks.classList.toggle('z-50');
+          mobileMenu.classList.toggle('hidden');
         });
       }
     });
+
+    // Payment Modal Functions
+    function openPaymentModal(projectName, price) {
+      document.getElementById('modalProjectName').textContent = projectName;
+      document.getElementById('modalPrice').textContent = 'RS' + price;
+      document.getElementById('paymentModal').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      
+      // Hide custom cursor
+      const dot = document.getElementById('cursorDot');
+      const ring = document.getElementById('cursorRing');
+      if (dot) dot.style.display = 'none';
+      if (ring) ring.style.display = 'none';
+    }
+
+    function closePaymentModal() {
+      document.getElementById('paymentModal').style.display = 'none';
+      document.body.style.overflow = 'auto';
+      
+      // Show custom cursor again
+      const dot = document.getElementById('cursorDot');
+      const ring = document.getElementById('cursorRing');
+      if (dot) dot.style.display = 'block';
+      if (ring) ring.style.display = 'block';
+    }
+
+    function closeSuccessModal() {
+      document.getElementById('successModal').style.display = 'none';
+      document.body.style.overflow = 'auto';
+      
+      // Show custom cursor again
+      const dot = document.getElementById('cursorDot');
+      const ring = document.getElementById('cursorRing');
+      if (dot) dot.style.display = 'block';
+      if (ring) ring.style.display = 'block';
+    }
+
+    // Handle payment form submission
+    function handlePaymentSubmit(event) {
+      event.preventDefault();
+      
+      // Close payment modal
+      closePaymentModal();
+      
+      // Show success modal
+      document.getElementById('successModal').style.display = 'flex';
+      
+      // Reset form
+      event.target.reset();
+      
+      // Show notification
+      setTimeout(() => {
+        alert('Thank you! We have received your payment details. You will receive your project shortly at the provided contact information.');
+      }, 500);
+    }
+
+    // Close modals when clicking outside
+    window.onclick = function(event) {
+      const paymentModal = document.getElementById('paymentModal');
+      const successModal = document.getElementById('successModal');
+      if (event.target === paymentModal) {
+        closePaymentModal();
+      }
+      if (event.target === successModal) {
+        closeSuccessModal();
+      }
+    }
   </script>
 </body>
 </html>
