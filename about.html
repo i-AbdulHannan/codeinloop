@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>codeinl∞︎︎p | We craft high-performance websites & WordPress solutions that drive real business growth.
- </title>
+  <title>VBuild | We craft high-performance websites & WordPress solutions that drive real business growth.</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -22,10 +21,23 @@
     .timeline-dot { width: 12px; height: 12px; background: #0326fc; border-radius: 50%; position: relative; }
     .load-reveal { opacity: 0; transform: translateY(20px); transition: opacity 1s ease, transform 1s ease; }
     .loaded .load-reveal { opacity: 1; transform: translateY(0); }
+    /* Logo image styling */
+    .logo-img {
+      height: 40px;
+      width: auto;
+      display: block;
+      filter: drop-shadow(0 0 8px rgba(3,38,252,0.3));
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+    .logo-img:hover {
+      transform: scale(1.05);
+      filter: drop-shadow(0 0 15px rgba(3,38,252,0.5));
+    }
     @media (max-width: 768px) {
       nav { padding: 12px 20px !important; }
       main { padding-top: 100px !important; }
       .hero-text { font-size: 3.5rem !important; }
+      .logo-img { height: 32px; }
     }
   </style>
 </head>
@@ -36,7 +48,11 @@
   <div id="pageWrapper" style="opacity:0; transition: opacity 1.5s cubic-bezier(0.2,1,0.3,1);">
     <!-- FIXED NAVBAR - Perfectly centered, no right shift -->
 <nav class="fixed top-4 sm:top-6 left-0 right-0 mx-auto w-[95%] sm:w-[90%] max-w-7xl z-50 glass-card px-4 sm:px-8 py-3 sm:py-4 flex items-center justify-between load-reveal" style="left: 50%; transform: translateX(-50%);">
-  <div class="text-xl sm:text-2xl font-bold tracking-tight text-white whitespace-nowrap">codeinl∞︎︎p</div>
+  <!-- LOGO - SIRF PICTURE, KOI TEXT NAHI -->
+  <div class="flex items-center">
+    <img src="images/logo.png" alt="VBuild Logo" class="logo-img">
+    <!-- Note: Upar wali temporary image hai. Aap apni real banana image ka URL yahan lagayein -->
+  </div>
   
   <!-- Desktop Navigation - Centered properly -->
   <div class="hidden md:flex items-center justify-center space-x-6 lg:space-x-10 text-sm font-medium text-white/80 absolute left-1/2 transform -translate-x-1/2">
@@ -77,8 +93,7 @@
           We code<br>the <span class="text-[#0326fc]">unreal</span>.
         </h1>
         <div class="grid md:grid-cols-2 gap-6 sm:gap-10 md:gap-16 mt-10 sm:mt-16">
-          <p class="text-base sm:text-lg md:text-xl text-white/60 load-reveal" style="transition-delay:0.3s;">codeinl∞︎︎p was founded in 2024 as a collaborative vision by Abdul Hannan and Saad Kamal two developers driven by a shared passion for clean code, modern technologies, and results-oriented web solutions.
-</p>
+          <p class="text-base sm:text-lg md:text-xl text-white/60 load-reveal" style="transition-delay:0.3s;">VBuild was founded in 2024 as a collaborative vision by Abdul Hannan and Saad Kamal two developers driven by a shared passion for clean code, modern technologies, and results-oriented web solutions.</p>
           <p class="text-base sm:text-lg md:text-xl text-white/40 load-reveal" style="transition-delay:0.4s;">Together, we combine strong backend logic, clean frontend experiences, and modern development practices to deliver reliable web and WordPress solutions that clients can trust.</p>
         </div>
       </section>
@@ -98,9 +113,8 @@
             <br><br>
             <span class="text-[#0326fc] text-xs sm:text-sm tracking-widest uppercase">Co-founder</span>
             <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 sm:mt-4">Saad Kamal</h2>
-            <p class="text-white/40 text-base sm:text-lg md:text-xl mt-4 sm:mt-6">MERN Stack Developer | Creating modern web experiences
-</p>
-            <p class="text-white/60 mt-6 sm:mt-8 leading-relaxed text-sm sm:text-base">"We don’t sell services. We build digital assets that grow your business while you sleep."</p>
+            <p class="text-white/40 text-base sm:text-lg md:text-xl mt-4 sm:mt-6">MERN Stack Developer | Creating modern web experiences</p>
+            <p class="text-white/60 mt-6 sm:mt-8 leading-relaxed text-sm sm:text-base">"We don't sell services. We build digital assets that grow your business while you sleep."</p>
             <div class="flex gap-3 sm:gap-4 mt-6 sm:mt-8">
               <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-[#0326fc]/20 flex items-center justify-center text-xl sm:text-2xl">→</div>
               <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white/5 flex items-center justify-center text-xl sm:text-2xl"><a href="https://www.linkedin.com/in/i-muhammadsaad/">in</a></div>
@@ -140,7 +154,7 @@
               <div>
                 <span class="text-[#0326fc] text-xl sm:text-2xl font-bold">2022</span>
                 <h4 class="text-xl sm:text-2xl md:text-3xl font-bold mt-1 sm:mt-2">The Idea Was Born</h4>
-                <p class="text-white/40 text-sm sm:text-base md:text-lg max-w-2xl">2022 wasn’t about launching it was about learning what greatness actually demands.</p>
+                <p class="text-white/40 text-sm sm:text-base md:text-lg max-w-2xl">2022 wasn't about launching it was about learning what greatness actually demands.</p>
               </div>
             </div>
             <div class="flex gap-4 sm:gap-6 md:gap-8 load-reveal" style="transition-delay:0.2s;">
@@ -155,8 +169,7 @@
               <div class="timeline-dot mt-1"></div>
               <div>
                 <span class="text-[#0326fc] text-xl sm:text-2xl font-bold">2024</span>
-                <h4 class="text-xl sm:text-2xl md:text-3xl font-bold mt-1 sm:mt-2">codeinl∞︎︎p
- founded</h4>
+                <h4 class="text-xl sm:text-2xl md:text-3xl font-bold mt-1 sm:mt-2">VBuild founded</h4>
                 <p class="text-white/40 text-sm sm:text-base md:text-lg max-w-2xl">2024 was the year vision turned into reality.</p>
               </div>
             </div>
@@ -207,10 +220,11 @@
       <footer class="border-t border-white/5 py-12 sm:py-16 md:py-20 px-4 sm:px-6">
         <div class="max-w-7xl mx-auto grid sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 md:gap-12">
           <div class="sm:col-span-2">
-            <div class="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">codeinl∞︎︎p
-</div>
-            <p class="text-white/40 text-xs sm:text-sm max-w-md">We Build Scalable
-Web & WordPress Solutions</p>
+            <div class="flex items-center gap-2 mb-3 sm:mb-4">
+              <img src="images/logo.png" alt="VBuild Logo" style="height: 32px; width: auto;">
+              <div class="text-xl sm:text-2xl font-bold">VBuild</div>
+            </div>
+            <p class="text-white/40 text-xs sm:text-sm max-w-md">We Build Scalable Web & WordPress Solutions</p>
           </div>
           <div>
             <h6 class="text-xs sm:text-sm text-white/40 mb-3 sm:mb-6">SOCIAL</h6>
@@ -222,7 +236,7 @@ Web & WordPress Solutions</p>
           <div>
             <h6 class="text-xs sm:text-sm text-white/40 mb-3 sm:mb-6">INQUIRIES</h6>
             <ul class="space-y-2 sm:space-y-3 text-white/70 text-sm sm:text-base">
-              <li><a href="mailto:inquiry.codeinloop@gmail.com" class="hover:text-white transition">inquiry.codeinloop@gmail.com</a></li>
+              <li><a href="mailto:inquiry.vbuild@gmail.com" class="hover:text-white transition">inquiry.vbuild@gmail.com</a></li>
             </ul>
           </div>
         </div>

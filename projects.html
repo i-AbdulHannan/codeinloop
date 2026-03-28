@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>codeinloop | We craft high-performance websites & WordPress solutions that drive real business growth.</title>
+  <title>VBuild | We craft high-performance websites & WordPress solutions that drive real business growth.</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -30,6 +30,19 @@
     .filter-active { background: #0326fc; border-color: #0326fc; }
     .load-reveal { opacity: 0; transform: translateY(20px); transition: 1s; }
     .loaded .load-reveal { opacity: 1; transform: translateY(0); }
+    
+    /* Logo image styling */
+    .logo-img {
+      height: 40px;
+      width: auto;
+      display: block;
+      filter: drop-shadow(0 0 8px rgba(3,38,252,0.3));
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+    .logo-img:hover {
+      transform: scale(1.05);
+      filter: drop-shadow(0 0 15px rgba(3,38,252,0.5));
+    }
     
     /* Modal Styles */
     .payment-modal { 
@@ -133,6 +146,7 @@
       nav { padding: 12px 20px !important; }
       main { padding-top: 100px !important; }
       .close-modal { top: 10px; right: 20px; }
+      .logo-img { height: 32px; }
     }
   </style>
 </head>
@@ -144,7 +158,10 @@
   <div id="pageWrapper" style="opacity:0; transition:1.5s">
     <!-- FIXED NAVBAR -->
     <nav class="fixed top-4 sm:top-6 left-0 right-0 mx-auto w-[95%] sm:w-[90%] max-w-7xl z-50 glass-card px-4 sm:px-8 py-3 sm:py-4 flex items-center justify-between load-reveal" style="left: 50%; transform: translateX(-50%);">
-      <div class="text-xl sm:text-2xl font-bold tracking-tight text-white whitespace-nowrap">codeinl∞︎︎p</div>
+      <!-- LOGO - SIRF PICTURE, KOI TEXT NAHI -->
+      <div class="flex items-center">
+        <img src="images/logo.png" alt="VBuild Logo" class="logo-img">
+      </div>
       
       <!-- Desktop Navigation -->
       <div class="hidden md:flex items-center justify-center space-x-6 lg:space-x-10 text-sm font-medium text-white/80 absolute left-1/2 transform -translate-x-1/2">
@@ -341,7 +358,7 @@
     </div>
 
     <footer class="border-t border-white/5 py-12 sm:py-16 md:py-20 px-4 sm:px-6 mt-16 sm:mt-20 md:mt-32">
-      <div class="max-w-7xl mx-auto text-white/30 text-center text-sm sm:text-base">© 2026 codeinloop. All rights reserved.</div>
+      <div class="max-w-7xl mx-auto text-white/30 text-center text-sm sm:text-base">© 2026 VBuild. All rights reserved.</div>
     </footer>
   </div>
 
