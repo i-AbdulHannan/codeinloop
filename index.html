@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>codeinloop | We craft high-performance websites & WordPress solutions that drive real business growth.
-</title>
+  <title>VBuild | We craft high-performance websites & WordPress solutions that drive real business growth.</title>
   <!-- Tailwind (CDN) + custom base -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Google Font: Space Grotesk -->
@@ -34,6 +33,16 @@
     @media (max-width: 480px) {
       .hero-section h1 { font-size: 3rem !important; }
     }
+    /* Logo image styling */
+    .logo-image {
+      font-size: 2rem;
+      display: inline-block;
+      filter: drop-shadow(0 0 10px rgba(3,38,252,0.3));
+      transition: transform 0.3s ease;
+    }
+    .logo-image:hover {
+      transform: scale(1.05);
+    }
   </style>
 </head>
 <body>
@@ -43,7 +52,9 @@
   <div id="pageWrapper" style="opacity:0; transition: opacity 1.5s cubic-bezier(0.2, 1, 0.3, 1);">
     <!-- NAVBAR - Fixed positioning with better spacing -->
     <nav class="fixed top-6 left-1/2 -translate-x-1/2 w-[95%] sm:w-[90%] max-w-7xl z-50 glass-card px-4 sm:px-8 py-3 sm:py-4 flex items-center justify-between load-reveal" style="transition-delay:0.1s;">
-      <div class="text-xl sm:text-2xl font-bold tracking-tight text-white whitespace-nowrap">codeinl∞︎︎p</div>
+      <div class="text-xl sm:text-2xl font-bold tracking-tight text-white whitespace-nowrap">
+        <span class="logo-image">🍌</span>
+      </div>
       
       <!-- Desktop Navigation -->
       <div class="hidden md:flex space-x-6 lg:space-x-10 text-sm font-medium text-white/80">
@@ -178,7 +189,7 @@ Web & WordPress Solutions</p>
       <footer class="border-t border-white/5 py-12 sm:py-16 md:py-20 px-4 sm:px-6 relative z-20">
         <div class="max-w-7xl mx-auto grid sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 md:gap-12">
           <div class="sm:col-span-2">
-            <div class="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">codeinl∞︎︎p</div>
+            <div class="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">🍌 VBuild</div>
             <p class="text-white/40 text-xs sm:text-sm max-w-md">We Build Scalable
 Web & WordPress Solutions</p>
           </div>
@@ -194,14 +205,14 @@ Web & WordPress Solutions</p>
           <div>
             <h6 class="text-xs sm:text-sm text-white/40 mb-3 sm:mb-6">INQUIRIES</h6>
             <ul class="space-y-2 sm:space-y-3 text-white/70 text-sm sm:text-base">
-              <li><a href="mailto:inquiry.codeinloop@gmail.com" class="hover:text-white transition">inquiry.codeinloop@gmail.com</a></li>
+              <li><a href="mailto:inquiry.vbuild@gmail.com" class="hover:text-white transition">inquiry.vbuild@gmail.com</a></li>
               <li><span class="text-white/30">+92 370 3148 937</span></li>
               <li><span class="text-white/30">+92 317 1243 725</span></li>
             </ul>
           </div>
         </div>
         <div class="max-w-7xl mx-auto mt-10 sm:mt-16 md:mt-20 pt-4 sm:pt-6 border-t border-white/5 text-xs sm:text-sm text-white/30 flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-0">
-          <span>2026 © & All Right Reserved by codeinloop</span>
+          <span>2026 © & All Right Reserved by VBuild</span>
           <span>▪▪▪</span>
         </div>
       </footer>
