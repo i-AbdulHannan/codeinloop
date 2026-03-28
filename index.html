@@ -34,14 +34,21 @@
       .hero-section h1 { font-size: 3rem !important; }
     }
     /* Logo image styling */
-    .logo-image {
-      font-size: 2rem;
-      display: inline-block;
-      filter: drop-shadow(0 0 10px rgba(3,38,252,0.3));
-      transition: transform 0.3s ease;
+    .logo-img {
+      height: 40px;
+      width: auto;
+      display: block;
+      filter: drop-shadow(0 0 8px rgba(3,38,252,0.3));
+      transition: transform 0.3s ease, filter 0.3s ease;
     }
-    .logo-image:hover {
+    .logo-img:hover {
       transform: scale(1.05);
+      filter: drop-shadow(0 0 15px rgba(3,38,252,0.5));
+    }
+    @media (max-width: 768px) {
+      .logo-img {
+        height: 32px;
+      }
     }
   </style>
 </head>
@@ -52,8 +59,10 @@
   <div id="pageWrapper" style="opacity:0; transition: opacity 1.5s cubic-bezier(0.2, 1, 0.3, 1);">
     <!-- NAVBAR - Fixed positioning with better spacing -->
     <nav class="fixed top-6 left-1/2 -translate-x-1/2 w-[95%] sm:w-[90%] max-w-7xl z-50 glass-card px-4 sm:px-8 py-3 sm:py-4 flex items-center justify-between load-reveal" style="transition-delay:0.1s;">
-      <div class="text-xl sm:text-2xl font-bold tracking-tight text-white whitespace-nowrap">
-        <span class="logo-image">🍌</span>
+      <div class="flex items-center">
+        <!-- LOGO - SIRF PICTURE, KOI TEXT NAHI -->
+        <img src="images/logo.png" alt="VBuild Logo" class="logo-img">
+        <!-- Note: Upar wali temporary image hai. Aap apni real banana image ka URL yahan lagayein -->
       </div>
       
       <!-- Desktop Navigation -->
@@ -81,7 +90,7 @@
         <div class="floating-blob" id="blob3" style="top: 40%; left: 60%; width: 30vmax; height: 30vmax; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.08), transparent 80%);"></div>
       </div>
 
-      <!-- HERO SECTION - Added padding-top to fix navbar overlap -->
+      <!-- HERO SECTION -->
       <section class="min-h-screen flex items-center justify-center relative px-4 sm:px-6 pt-32 sm:pt-36 md:pt-40 lg:pt-48 hero-section">
         <div class="max-w-7xl mx-auto text-center">
           <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[1.1]">
@@ -96,13 +105,6 @@ Web & WordPress Solutions</p>
             <a href="contact.html" class="border border-white/20 px-6 sm:px-10 py-3 sm:py-4 rounded-full text-sm sm:text-base font-medium hover:bg-white hover:text-black transition-all">Start venture</a>
           </div>
         </div>
-        <!-- Scroll hint -->
-        <!-- <div class="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 text-white/30 text-xs sm:text-sm flex flex-col items-center gap-2">
-          <span>scroll to explore</span>
-          <div class="w-4 sm:w-5 h-8 sm:h-10 border border-white/20 rounded-full flex justify-center">
-            <div class="w-1 h-1.5 sm:h-2 bg-white/40 rounded-full mt-2 animate-bounce"></div>
-          </div>
-        </div> -->
       </section>
 
       <!-- SERVICES PREVIEW -->
@@ -138,28 +140,22 @@ Web & WordPress Solutions</p>
               <div class="flex gap-4 sm:gap-6 items-start load-reveal">
                 <span class="text-2xl sm:text-3xl text-[#0326fc]">⏤</span>
                 <div>
-                  <h4 class="text-lg sm:text-xl font-semibold">Performance-Driven Development
-</h4>
-                  <p class="text-white/50 text-sm sm:text-base">We focus on clean, optimized, and scalable code to deliver fast-loading websites that rank better, convert more, and grow with your business.
-</p>
+                  <h4 class="text-lg sm:text-xl font-semibold">Performance-Driven Development</h4>
+                  <p class="text-white/50 text-sm sm:text-base">We focus on clean, optimized, and scalable code to deliver fast-loading websites that rank better, convert more, and grow with your business.</p>
                 </div>
               </div>
               <div class="flex gap-4 sm:gap-6 items-start load-reveal">
                 <span class="text-2xl sm:text-3xl text-[#0326fc]">⏤</span>
                 <div>
-                  <h4 class="text-lg sm:text-xl font-semibold">User-Focused Design
-</h4>
-                  <p class="text-white/50 text-sm sm:text-base">Every website we build is designed for real users intuitive layouts, clear messaging, and seamless experiences across all devices.
-</p>
+                  <h4 class="text-lg sm:text-xl font-semibold">User-Focused Design</h4>
+                  <p class="text-white/50 text-sm sm:text-base">Every website we build is designed for real users intuitive layouts, clear messaging, and seamless experiences across all devices.</p>
                 </div>
               </div>
               <div class="flex gap-4 sm:gap-6 items-start load-reveal">
                 <span class="text-2xl sm:text-3xl text-[#0326fc]">⏤</span>
                 <div>
-                  <h4 class="text-lg sm:text-xl font-semibold">Business-Focused Results
-</h4>
-                  <p class="text-white/50 text-sm sm:text-base">We don’t just build websites, we create digital assets that generate leads, improve credibility, and support long-term business goals.
-</p>
+                  <h4 class="text-lg sm:text-xl font-semibold">Business-Focused Results</h4>
+                  <p class="text-white/50 text-sm sm:text-base">We don't just build websites, we create digital assets that generate leads, improve credibility, and support long-term business goals.</p>
                 </div>
               </div>
             </div>
@@ -189,9 +185,11 @@ Web & WordPress Solutions</p>
       <footer class="border-t border-white/5 py-12 sm:py-16 md:py-20 px-4 sm:px-6 relative z-20">
         <div class="max-w-7xl mx-auto grid sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 md:gap-12">
           <div class="sm:col-span-2">
-            <div class="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">🍌 VBuild</div>
-            <p class="text-white/40 text-xs sm:text-sm max-w-md">We Build Scalable
-Web & WordPress Solutions</p>
+            <div class="flex items-center gap-2 mb-3 sm:mb-4">
+              <img src="images/logo.png" alt="VBuild Logo" style="height: 32px; width: auto;">
+              <div class="text-xl sm:text-2xl font-bold">VBuild</div>
+            </div>
+            <p class="text-white/40 text-xs sm:text-sm max-w-md">We Build Scalable Web & WordPress Solutions</p>
           </div>
           <div>
             <h6 class="text-xs sm:text-sm text-white/40 mb-3 sm:mb-6">SOCIAL</h6>
@@ -301,7 +299,7 @@ Web & WordPress Solutions</p>
         });
       }
 
-      // Mobile menu toggle (simple)
+      // Mobile menu toggle
       const menuBtn = document.querySelector('button.md\\:hidden');
       const navLinks = document.querySelector('.hidden.md\\:flex');
       if (menuBtn && navLinks) {
